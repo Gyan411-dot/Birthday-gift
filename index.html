@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:500px;
+    color:white;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+    z-index:10;
+}
+
+h1{
+    font-size:2.5rem;
+    margin-bottom:15px;
+    animation: glow 2s infinite alternate;
+}
+
+p{
+    font-size:1.1rem;
+    line-height:1.6;
+}
+
+.cake{
+    font-size:80px;
+    margin:20px 0;
+    animation:bounce 2s infinite;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#fff;
+    color:#ff4d6d;
+    font-size:1rem;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px #fff; }
+    to{ text-shadow:0 0 25px #fff,0 0 40px #ffeb3b; }
+}
+
+@keyframes bounce{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-12px); }
+}
+
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    top:-20px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+@media(max-width:600px){
+    h1{
+        font-size:2rem;
+    }
+
+    p{
+        font-size:1rem;
+    }
+
+    .cake{
+        font-size:65px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎉 Happy Birthday! 🎉</h1>
+
+    <div class="cake">🎂</div>
+
+    <p>
+        Wishing you a day filled with happiness, laughter,
+        and unforgettable memories. May all your dreams
+        come true and your year be filled with success,
+        love, and joy!
+    </p>
+
+    <button onclick="showMessage()">Click for a Surprise 🎁</button>
+
+    <p id="surprise" style="margin-top:15px;font-weight:bold;"></p>
+</div>
+
+<script>
+function showMessage(){
+    document.getElementById("surprise").innerHTML =
+        "✨ You are amazing! Have the best birthday ever! ✨";
+}
+
+// Confetti Animation
+function createConfetti(){
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+
+    const colors = [
+        "#ff0","#ff4d6d","#00e5ff",
+        "#7cff00","#ff9800","#ffffff"
+    ];
+
+    confetti.style.background =
+        colors[Math.floor(Math.random()*colors.length)];
+
+    confetti.style.animationDuration =
+        (Math.random()*3 + 2) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(()=>{
+        confetti.remove();
+    },5000);
+}
+
+setInterval(createConfetti,100);
+</script>
+
+</body>
+</html>
